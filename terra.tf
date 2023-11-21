@@ -14,7 +14,7 @@ resource "aws_vpc" "Bam" {
 }
 
 resource "aws_internet_gateway" "Bam_igw" {
-  vpc_id = aws_vpc.Bam
+  vpc_id = "vpc-0737f0349aba65f45"
 
   tags = {
     Name = "Bam_igw"
@@ -22,18 +22,15 @@ resource "aws_internet_gateway" "Bam_igw" {
 }
 
 resource "aws_route_table" "Bam_RT" {
-  vpc_id = aws_vpc.Bam
+  vpc_id = "vpc-0737f0349aba65f45"
 
   route {
-    cidr_block = "10.0.1.0/24"
-    gateway_id = aws_internet_gateway.Bam_igw
-  }
-
-  route {
-    ipv6_cidr_block        = "::/0"
+    cidr_block = "10.1.0.0/24"
+    gateway_id = "igw-06ce0e9f07fb5ab9d"
   }
 
   tags = {
     Name = "Bam"
   }
 }
+
