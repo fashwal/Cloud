@@ -5,18 +5,10 @@ secret_key = "D6L3z06n18NcB9Hpnmc4wafaEByjhsHmd27K+G+b"
 }
 
 
-resource "aws_instance" "AMI" {
-  ami           = "ami-0230bd60aa48260c6"  
-  instance_type = "t2.micro"
-  tags = {
-    Name = "TEXT"
-  }
-}
-
-
 resource "aws_vpc" "Test" {
   cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+  enable_dns_support = true
+  enable_dns_hostnames = true
 
   tags = {
     Name = "Test"
@@ -72,3 +64,13 @@ resource "aws_s3_bucket" "S3-bucket" {
   }
 }
 
+
+resource "aws_instance" "AMI" {
+  ami           = "ami-0230bd60aa48260c6"  
+  instance_type = "t2.micro"
+  subnet_id      = aws_subnet.Test_Sub.id
+  
+  tags = {
+    Name = "TEXT"
+  }
+}
