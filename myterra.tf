@@ -37,7 +37,7 @@ resource "aws_route_table" "Test_RT_Public" {
   vpc_id = aws_vpc.Test.id
 
   route {
-    cidr_block = "10.1.0.0/24"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.Test_IGW.id
   }
   
